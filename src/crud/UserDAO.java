@@ -15,7 +15,8 @@ public class UserDAO {
     // create
     public void createUser(String name, String email) {
         String createUserQuery = "INSERT INTO USER (name,email) VALUES (?,?) ";
-        try (Connection connection = DataBaseUtil.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(createUserQuery)) {
+        try (Connection connection = DataBaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(createUserQuery)) {
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, email);
@@ -32,7 +33,9 @@ public class UserDAO {
     public List<Users> getAllUsers() {
         List<Users> usersList = new ArrayList<>();
         String sql = "SELECT * FROM user";
-        try (Connection connection = DataBaseUtil.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql); ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (Connection connection = DataBaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
